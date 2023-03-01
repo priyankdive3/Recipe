@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'ok.css' %}">
+    
+</head>
+
+<body>
+    <h2 class="ok">priya</h2>
+
+    <!-- partial:index.partial.html -->
+    <div id="drag-container">
+        <div id="spin-container">
+            <img src="https://iili.io/HTjH72V.jpg" alt="">
+            <img src="https://iili.io/HTjHCk7.jpg" alt="">
+            <img src="https://iili.io/HTjH3Bf.jpg" alt="">
+            <img src="https://iili.io/HTjHKrl.jpg" alt="">
+            <img src="https://iili.io/HTjHRrQ.jpg" alt="">
+            <img src="https://iili.io/HTjHAEx.jpg" alt="">
+
+            <!-- Example image with link -->
+            <a target="_blank" href="https://images.pexels.com/photos/139829/pexels-photo-139829.jpeg">
+                <img src="https://images.pexels.com/photos/139829/pexels-photo-139829.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                    alt="">
+            </a>
+        </div>
+        <div id="ground">
+
+        </div>
+    </div>
+    <!-- github corner (https://github.com/tholman/github-corners) -->
+    <style>
+        .github-corner:hover .octo-arm {
+            animation: octocat-wave 560ms ease-in-out
+        }
+
+        @keyframes octocat-wave {
+
+            0%,
+            100% {
+                transform: rotate(0)
+            }
+
+            20%,
+            60% {
+                transform: rotate(-25deg)
+            }
+
+            40%,
+            80% {
+                transform: rotate(10deg)
+            }
+        }
+
+        @media (max-width:500px) {
+            .github-corner:hover .octo-arm {
+                animation: none
+            }
+
+            .github-corner .octo-arm {
+                animation: octocat-wave 560ms ease-in-out
+            }
+        }
+    </style>
+    <!-- partial -->
+    <script  src="{% static 'ok.js' %}"></script>
+
+
+</body>
+
+</html>

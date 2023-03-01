@@ -1,0 +1,33 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'ok.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    
+    <script src="{% static 'ok.js' %}"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <div id="drag-container">
+        <div id="spin-container">
+            <img src="{% static 'barbeque.jpg' %}" alt="" style="width: 250px;">
+            <img src="{% static 'biryani.jpg' %}" alt="" style="width: 250px;">
+            <img src="{% static 'juice.jpg' %}" alt="" style="width: 250px;">
+            <img src="{% static 'paneer.jpg' %}" alt="" style="width: 250px;">
+            <img src="{% static 'salad.jpg' %}" alt="" style="width: 250px;">
+            <img src="{% static 'rice.jpg' %}" alt="" style="width: 250px;">
+        </div>
+        <div id="ground"></div>
+    </div><br><br>
+    <br><br>
+</body>
+</html>

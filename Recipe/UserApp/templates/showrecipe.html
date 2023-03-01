@@ -1,0 +1,129 @@
+{% extends "homepage.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .midsec {
+    height: 180vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    /* border: 1px solid navy; */
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.greybox {
+    width: 70%;
+    height: 60%;
+    /* border: 1px solid red; */
+    background-color: rgb(203, 199, 199);
+    z-index: 1;
+    position: absolute;
+    top: 310px;
+    left: 240px;
+
+
+}
+
+.midbox {
+    width: 76.5%;
+    height: 70%;
+    /* border: 1px solid red; */
+    /* background-color: yellow; */
+    display: flex;
+    z-index: 2;
+    position: absolute;
+    /* top: 1900px; */
+    left: 300px;
+}
+
+.whibox {
+    width: 38%;
+    height: 45%;
+    /* border: 1px solid red; */
+    background-color: white;
+    z-index: 3;
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    left: 80px;
+    /* top: 2000px; */
+    align-items: center;
+    justify-content: center;
+}
+
+.whib1 {
+    height: 10%;
+    width: 60%;
+    display: flex;
+    /* border: 1px solid blue; */
+    font-size: 35px;
+    flex-direction: column;
+    position: relative;
+    right: 50px;
+
+
+}
+
+.whi2 {
+    height: 50%;
+    width: 80%;
+    display: flex;
+    color: rgb(110, 105, 105);
+    /* border: 1px solid greenyellow; */
+    align-items: center;
+    line-height: 1.4;
+    font-size: 18px;
+
+
+}
+
+.box1 {
+    height: 13%;
+    width: 30%;
+    display: flex;
+    border: 1px solid grey;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    right: 120px;
+}
+    </style>
+</head>
+<body>
+    <div class="midsec">
+        {% for cate in cat1 %}
+        <div class="greybox">
+            <img src="" alt="">
+        </div>
+        <div class="midbox">
+            <img src="../ASSETS/Outdoor.jpg" alt="" height="100%" width="100%">
+        </div>
+        <div class="whibox">
+            <div class="whib1">
+                <h1>{{cate.product_name}}</h1>
+                <!-- <a class="tag1" href="" style="text-decoration: none; color: black;">{{produc.product_name}}</a> -->
+            </div>
+            <div class="whi2">
+                <p class="par1">Our signature Outdoor Pursuits program is designed for families to create
+                    memories
+                    together. Whether you're trying a new sport or taking a day trip,our team will ensure you
+                    make the
+                    most of every minute with activities designed to help you take advantage of everything each
+                    region
+                    has to offer.</p>
+            </div>
+            <div class="box1"><a href="" style="text-decoration: none ; color: black;">Explore</a></div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endblock %}
+</body>
+</html>

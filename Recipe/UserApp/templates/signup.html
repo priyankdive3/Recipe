@@ -1,0 +1,53 @@
+{% extends "homepage.html" %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sign-Up</title>
+    
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+    
+    <!-- partial:index.partial.html -->
+    <div class="login-box">
+      <h2>Sign Up</h2>
+      <form method="post" autocomplete="off">
+        {% csrf_token %}
+        <div class="user-box">
+          <input type="text" name="uname" required="">
+          <p>Username</p>
+          
+        </div>
+        <div class="user-box">
+            <input type="email" name="email" required="">
+            <p>Email</p>
+          </div>
+        <div class="user-box">
+          <input type="password" name="pwd" required="">
+          <p>Password</p>
+        </div>
+        <center>
+          <button type="submit" style="background-color: black" >
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          Submit
+        </button>
+    </center>
+    
+      </form>
+      {% endblock %}
+    </div>
+    <!-- partial -->
+    
+    </body>
+    
+
+</html>

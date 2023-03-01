@@ -1,0 +1,160 @@
+{% extends "homepage.html" %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <!-- <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>
+<link rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'><link rel="stylesheet" href="./style.css"> -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'ok .css' %}">
+</head>
+<style>
+    /* * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    } */
+
+    /* body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    } */
+
+    .card {
+        position: relative;
+        width: 600px;
+        height: 350px;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        transition: 0.5s;
+    }
+
+    .card .circle {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 20px;
+        overflow: hidden;
+    }
+
+    .card .circle::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #d83133;
+        clip-path: circle(120px at center);
+        transition: 0.5s;
+    }
+
+    .card:hover .circle::before {
+        background: #0065c3;
+        clip-path: circle(400px at center);
+    }
+
+    .card img {
+        position: absolute;
+        top: 58%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 300px;
+        pointer-events: none;
+        transition: 0.5s;
+    }
+
+    .card:hover img {
+        left: 78%;
+        height: 400px;
+    }
+
+    .card .content {
+        position: relative;
+        width: 50%;
+        left: 20%;
+        padding: 20px 20px 20px 40px;
+        transition: 0.5s;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .card:hover .content {
+        left: 0;
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .card .content h2 {
+        color: #fff;
+        text-transform: uppercase;
+        font-size: 2em;
+        line-height: 1em;
+        margin-bottom: 5px;
+    }
+
+    .card .content h3 {
+        color: #fff;
+        text-transform: uppercase;
+        font-size: 1em;
+        margin-bottom: 10px;
+        font-weight: 700;
+    }
+
+    .card .content p {
+        color: #fff;
+    }
+
+    .card .content a {
+        position: relative;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 10px;
+        background: #fff;
+        color: #111;
+        margin-top: 10px;
+        display: inline-block;
+        text-decoration: none;
+        font-weight: 700;
+        transition: 0.5s;
+    }
+
+    .center {
+        display: grid;
+        grid-template-columns: auto auto;
+        gap: 10px;
+
+        padding: 10px;
+    }
+</style>
+
+<body>
+    <div class="flex-container">
+        {% for produc in prod %}
+        <div class="flex-item bg-one tilt" style="height: 400px; width: 300px;">
+            <center>
+                <div class="text">{{produc.product_name}}</div>
+                
+            </center>
+            <a href="/showrecipe/{{produc.id}}"> <span><img src="{{produc.image.url}}" style="height: 400px; width: 400px;"></span>
+
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    {% endblock %}
+</body>
+
+
+</html>

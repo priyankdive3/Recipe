@@ -1,0 +1,483 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Recipe</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'ok.css' %}">
+    <link rel="stylesheet" href="{% static 'frame.css' %}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        /* * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        } */
+
+        /* body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        } */
+
+        .card {
+            position: relative;
+            width: 600px;
+            height: 350px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            transition: 0.5s;
+        }
+        
+        .card .circle {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .card .circle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            clip-path: circle(120px at center);
+            transition: 0.5s;
+        }
+
+        .card:hover .circle::before {
+            background: #0065c3;
+            clip-path: circle(400px at center);
+        }
+
+        .card img {
+            position: absolute;
+            top: 58%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 200px;
+            pointer-events: none;
+            transition: 0.5s;
+        }
+
+        .card:hover img {
+            left: 78%;
+            height: 400px;
+        }
+
+        .card .content {
+            position: relative;
+            width: 50%;
+            left: 20%;
+            padding: 20px 20px 20px 40px;
+            transition: 0.5s;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .card:hover .content {
+            left: 0;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .card .content h2 {
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 2em;
+            line-height: 1em;
+            margin-bottom: 5px;
+        }
+
+        .card .content h3 {
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 1em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .card .content p {
+            color: #fff;
+        }
+
+        .card .content a {
+            position: relative;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 10px;
+            background: #fff;
+            color: #111;
+            margin-top: 10px;
+            display: inline-block;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.5s;
+        }
+
+        .center {
+            display: grid;
+            grid-template-columns: auto auto;
+            gap: 10px;
+
+            padding: 10px;
+        }
+
+        /* Remove the navbar's default rounded borders and increase the bottom margin */
+        .navbar {
+            margin-bottom: 50px;
+            border-radius: 0;
+        }
+
+        /* Remove the jumbotron's default bottom margin */
+        .jumbotron {
+            margin-bottom: 0;
+        }
+
+
+        /* Add a gray background color and some padding to the footer */
+        footer {
+            background-color: black;
+            padding: 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                {% if "username" in request.session %}
+                <p style="color: white;">Welcome {{request.session.username}}</p>
+                {% else %}
+                <a class="navbar-brand" href="#">Logo</a>
+                {% endif %}
+              </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/">Home</a></li>
+                    <li class="active"><a href="#">Product</a></li>
+                    <li class="active"><a href="#">Category</a></li>
+                    <!-- <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Category</a>
+                        <ul class="dropdown-menu">
+                            {% for cate in cat %}
+                        <li><a href="/showrecipe/{{cate.id}}">{{cate.Category_name}}</a></li>
+                          {% endfor %}
+                        </ul>
+                    </li> -->
+                    <li class="active"><a href="#">KP's Kitchen Diaries</a></li>
+                </ul>
+                <!-- <h3 style="font-family: serif; color: aliceblue;">Pri's Kitchen Diaries</h3> -->
+                <ul class="nav navbar-nav navbar-right">
+                    {% if "username" in request.session %}
+                    <li><a href="signout"><span class="glyphicon glyphicon-user"></span> Logout</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+                    {% else %}
+                    <li><a href="login"><span class="glyphicon glyphicon-user"></span> Login</a></li>
+                    <li><a href="signup"><span class="glyphicon glyphicon-user"></span> Signup</a></li>
+                    {% endif %}
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Verdana, sans-serif;
+        }
+
+        .mySlides {
+            display: none;
+        }
+
+        img {
+            vertical-align: middle;
+        }
+
+        /* Slideshow container */
+        .slideshow-container {
+            max-width: 100%;
+            position: relative;
+            margin: auto;
+        }
+
+        /* Caption text */
+        .text {
+            color: #f2f2f2;
+            font-size: 15px;
+            padding: 8px 12px;
+            position: absolute;
+            bottom: 8px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Number text (1/3 etc) */
+        .numbertext {
+            color: #f2f2f2;
+            font-size: 12px;
+            padding: 8px 12px;
+            position: absolute;
+            top: 0;
+        }
+
+        /* The dots/bullets/indicators */
+        .dot {
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+
+        .active {
+            background-color: #717171;
+        }
+
+        /* Fading animation */
+        .fade {
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+
+        @keyframes fade {
+            from {
+                opacity: .4
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        /* On smaller screens, decrease text size */
+        @media only screen and (max-width: 300px) {
+            .text {
+                font-size: 11px
+            }
+        }
+    </style>
+    {% block content %}
+    <!-- <center>
+        <h2>KP's Kitchen Diary</h2>
+    </center> -->
+
+    <div class="slideshow-container">
+
+        <div class="mySlides fade">
+            <div class="numbertext">1 / 3</div>
+            <img src="{% static 'barbeque.jpg' %}" style="width:100%" height="450px">
+            <div class="text">Caption Text</div>
+        </div>
+
+        <div class="mySlides fade">
+            <div class="numbertext">2 / 3</div>
+            <img src="{% static 'barbeque.jpg' %}" style="width:100%" height="450px">
+            <div class="text">Caption Two</div>
+        </div>
+
+        <div class="mySlides fade">
+            <div class="numbertext">3 / 3</div>
+            <img src="{% static 'barbeque.jpg' %}" style="width:100%" height="450px">
+            <div class="text">Caption Three</div>
+        </div>
+
+    </div>
+    <br>
+
+    <div style="text-align:center">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>
+
+
+    <!-- <div class="carousel">
+        <div class="carousel-controls">
+          <input id="1" type="radio" name="controls" checked />
+          <input id="2" type="radio" name="controls" />
+          <input id="3" type="radio" name="controls" />
+          <div class="dots">
+            <label for="1"></label>
+            <label for="2"></label>
+            <label for="3"></label>
+          </div>
+          <div class="carousel-images">
+            <img src="{% static 'barbeque.jpg' %}" />
+            <img src="{% static 'biryani.jpg' %}" />
+            <img src="{% static 'juice.jpg' %}" />
+          </div>
+        </div>
+      </div> -->
+    <!-- <div id="drag-container">
+        <div id="spin-container">
+            <img src="{% static 'barbeque.jpg' %}" alt="" style="width: 250px;">
+            <img src="{% static 'biryani.jpg' %}" alt="" style="width: 250px;">
+            <img src="{% static 'juice.jpg' %}" alt="" style="width: 250px;">
+            <img src="{% static 'paneer.jpg' %}" alt="" style="width: 250px;">
+            <img src="{% static 'salad.jpg' %}" alt="" style="width: 250px;">
+            <img src="{% static 'rice.jpg' %}" alt="" style="width: 250px;">
+        </div>
+        <div id="ground"></div>
+    </div><br><br> -->
+    <br><br>
+
+    <div class="center">
+        {% for produc in prod %}
+        <div class="card">
+            <div class="circle">
+                <div class="content">
+                    <h2>{{produc.Category_name}}</h2>
+                    <h3>Zero Sugar</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore
+                        et dolore magna aliqua.</p>
+                    <a href="/explore/{{produc.id}}">explore</a>
+                </div>
+                <img src="{{produc.image.url}}" alt="" style="width:200px" height="100px">
+                <br><h2 style="padding-left: 38%;">{{produc.Category_name}}</h2>
+            </div>
+        </div>
+        {% endfor %}
+    </div><br>
+
+    {% endblock %}
+    <script>
+        new Vue({
+            el: "#app",
+            data() {
+                return {
+                    currentCardBackground: Math.floor(Math.random() * 25 + 1), // just for fun :D
+                    cardName: "",
+                    cardNumber: "",
+                    cardMonth: "",
+                    cardYear: "",
+                    cardCvv: "",
+                    minCardYear: new Date().getFullYear(),
+                    amexCardMask: "#### ###### #####",
+                    otherCardMask: "#### #### #### ####",
+                    cardNumberTemp: "",
+                    isCardFlipped: false,
+                    focusElementStyle: null,
+                    isInputFocused: false
+                };
+            },
+            mounted() {
+                this.cardNumberTemp = this.otherCardMask;
+                document.getElementById("cardNumber").focus();
+            },
+            computed: {
+                getCardType() {
+                    let number = this.cardNumber;
+                    let re = new RegExp("^4");
+                    if (number.match(re) != null) return "visa";
+
+                    re = new RegExp("^(34|37)");
+                    if (number.match(re) != null) return "amex";
+
+                    re = new RegExp("^5[1-5]");
+                    if (number.match(re) != null) return "mastercard";
+
+                    re = new RegExp("^6011");
+                    if (number.match(re) != null) return "discover";
+
+                    re = new RegExp('^9792')
+                    if (number.match(re) != null) return 'troy'
+
+                    return "visa"; // default type
+                },
+                generateCardNumberMask() {
+                    return this.getCardType === "amex" ? this.amexCardMask : this.otherCardMask;
+                },
+                minCardMonth() {
+                    if (this.cardYear === this.minCardYear) return new Date().getMonth() + 1;
+                    return 1;
+                }
+            },
+            watch: {
+                cardYear() {
+                    if (this.cardMonth < this.minCardMonth) {
+                        this.cardMonth = "";
+                    }
+                }
+            },
+            methods: {
+                flipCard(status) {
+                    this.isCardFlipped = status;
+                },
+                focusInput(e) {
+                    this.isInputFocused = true;
+                    let targetRef = e.target.dataset.ref;
+                    let target = this.$refs[targetRef];
+                    this.focusElementStyle = {
+                        width: `${target.offsetWidth}px`,
+                        height: `${target.offsetHeight}px`,
+                        transform: `translateX(${target.offsetLeft}px) translateY(${target.offsetTop}px)`
+                    }
+                },
+                blurInput() {
+                    let vm = this;
+                    setTimeout(() => {
+                        if (!vm.isInputFocused) {
+                            vm.focusElementStyle = null;
+                        }
+                    }, 300);
+                    vm.isInputFocused = false;
+                }
+            }
+        });
+
+    </script>
+    <script>
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1 }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+            setTimeout(showSlides, 2000); // Change image every 2 seconds
+        }
+    </script>
+    <script src="{% static 'ok.js' %}"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js'></script>
+
+</body>
+
+</html>
