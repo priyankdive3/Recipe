@@ -99,16 +99,16 @@
 </head>
 <body>
     <div class="midsec">
-        {% for cate in cat1 %}
+      
         <div class="greybox">
             <img src="" alt="">
         </div>
         <div class="midbox">
-            <img src="../ASSETS/Outdoor.jpg" alt="" height="100%" width="100%">
+            <img src="{{prod.image.url}}" alt="" height="100%" width="100%">
         </div>
         <div class="whibox">
             <div class="whib1">
-                <h1>{{cate.product_name}}</h1>
+                <h1>{{prod.product_name}}</h1>
                 <!-- <a class="tag1" href="" style="text-decoration: none; color: black;">{{produc.product_name}}</a> -->
             </div>
             <div class="whi2">
@@ -122,7 +122,7 @@
             </div>
             <div class="box1"><a href="" style="text-decoration: none ; color: black;">Explore</a></div>
         </div>
-        {% endfor %}
+       
     </div>
     {% endblock %}
 </body>

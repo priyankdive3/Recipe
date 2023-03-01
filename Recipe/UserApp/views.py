@@ -59,10 +59,12 @@ def viewdetails(request,did):
 
 def showrecipe(request,did):
     
-    id=Category.objects.get(id=did)
-    
-    prod=Product.objects.filter(cat=cat1)
+    prod=Product.objects.get(id=did)
+ 
+   
     return render(request,"showrecipe.html",{"prod":prod})
+    
+
 
 # def showrecipe(request,did):
 #     cate=Category.objects.get(id=did)
