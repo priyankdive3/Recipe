@@ -15,6 +15,7 @@ class Product(models.Model):
     product_name=models.CharField(max_length=500)
     ingredients=models.CharField(max_length=500)
     description=models.CharField(max_length=50000)
+    small_description=models.CharField(max_length=50000)
     image=models.ImageField(default='abc.jpg',upload_to='Images')
     cat=models.ForeignKey(to='Category',on_delete=models.CASCADE)
 
@@ -28,3 +29,14 @@ class UserInformation(models.Model):
 
     class Meta:
         db_table="UserInformation"    
+
+class Ingredients(models.Model):
+    item_name=models.CharField(max_length=30)
+    price=models.CharField(max_length=50)
+    sale_price=models.CharField(max_length=50)
+    image=models.ImageField(default='abc.jpg',upload_to='Images')
+    description=models.CharField(max_length=2000)
+    quantity=models.IntegerField()
+
+    class Meta:
+        db_table="Ingredients"

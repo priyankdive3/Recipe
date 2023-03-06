@@ -51,13 +51,13 @@
             bottom: 15px;
         } */
 
-        .menu .menu_box {
+        /* .menu .menu_box {
             width: 95%;
-            margin: 0 auto;
+            margin: auto;
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr;
             grid-gap: 15px;
-        }
+        } */
 
         .menu .menu_box .menu_card {
             width: 325px;
@@ -156,6 +156,7 @@
             padding: 8px 10px;
             margin: 0 80px;
             transition: 0.3s;
+            
         }
 
 
@@ -326,15 +327,15 @@
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="/">Home</a></li>
-                    <li class="active"><a href="#">Product</a></li>
-                    <li class="active"><a href="#Menu">Category</a></li>
+                    <li class="active"><a href="/products">Product</a></li>
+                    <li class="active"><a href="/#Menu">Category</a></li>
                     
                 </ul>
                 <!-- <h3 style="font-family: serif; color: aliceblue;">Pri's Kitchen Diaries</h3> -->
                 <ul class="nav navbar-nav navbar-right">
                     {% if "username" in request.session %}
                     <li><a href="signout"><span class="glyphicon glyphicon-user"></span> Logout</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart<i
+                    <li><a href="/cart"><span class="glyphicon glyphicon-shopping-cart"></span> Cart<i
                                 class="fa-solid fa-cart-shopping"></i></a></li>
                     {% else %}
                     <li><a href="login"><span class="glyphicon glyphicon-user"></span> Login</a></li>
@@ -426,11 +427,21 @@
                 font-size: 11px
             }
         }
+
+        h2  {
+            color: #fac031;
+            margin-left: 15px;
+            font-family: mv boli;
+            font-weight: bold;
+            font-size: 400%;
+        }
     </style>
     {% block content %}
-    <!-- <center>
+
+    <center>
+
         <h2>KP's Kitchen Diary</h2>
-    </center> -->
+    </center>
 
     <div class="slideshow-container">
 
@@ -497,6 +508,7 @@
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star-half-stroke"></i>
                     </div>
+                    <br>
                     <a href="/explore/{{produc.id}}" class="menu_btn">Explore</a>
 
                 </div>
