@@ -58,13 +58,8 @@ def viewdetails(request,did):
     return render(request,"explore.html",{"prod":prod})
 
 def showrecipe(request,did):
-    
     prod=Product.objects.get(id=did)
- 
-   
     return render(request,"showrecipe.html",{"prod":prod})
-    
-
 
 # def showrecipe(request,did):
 #     cate=Category.objects.get(id=did)
